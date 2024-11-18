@@ -42,83 +42,73 @@ def cadastrar_filme():
                 print('❌ Insira um número válido para o ano de lançamento.')
 
         # Armazenar o filme
-        dados_do_filme = {'titulo': titulo, 'diretor': diretor, 'ano_lancamento': ano_lancamento}
-        filmes.append(dados_do_filme)
-
+        filmes.append({'titulo': titulo, 'diretor': diretor, 'ano_lancamento': ano_lancamento})
         print(f"\n✅ O filme '{titulo}' foi cadastrado com sucesso!")
 
-        # Perguntar se deseja cadastrar outro filme
-        while True:
-            continuar = input('Deseja cadastrar outro filme? (s/n): ').strip().lower()
-            if continuar == 's':
-                break  # Reinicia o loop para cadastrar outro filme
-            elif continuar == 'n':
-                print("\n👍 Cadastro concluído! Retornando ao menu principal...")
-                return  # Sai da função e retorna ao menu principal
-            else:
-                print('❌ Opção inválida! Digite "s" para Sim ou "n" para Não.')
+        continuar = input('Deseja cadastrar outro filme? (s/n): ').strip().lower()
+        if continuar == 'n':
+            break
+
 
 
 def listar_filmes():
     if not filmes:
         print("❌ Nenhum titulo cadastrado ainda.")
-        print('')
-        input('Enter para voltar para Menu')
+        input('Pressione Enter para voltar ao menu.')
         return
 
 
     print('🎥 Lista de Filmes 🎥')
-    print('-'*60)
-    print('Título'.ljust(15) + '|  Diretor'.ljust(25) + '| Ano de Lançamento')
-    print('-'*60)
+    print('-' * 60)
+    print(f"{'Título'.ljust(20)} | {'Diretor'.ljust(20)} | {'Ano de Lançamento'}")
+    print('-' * 60)
 
     for filme in filmes:
-        busca_filme = filme['titulo']
-        busca_diretor = filme['diretor']
-        busca_ano = filme['ano_lancamento']
-
-        print(f"{busca_filme.ljust(14)} | {busca_diretor.ljust(35)} | {busca_ano}")
+        print(f"{filme['titulo'].ljust(20)} | {filme['diretor'].ljust(20)} | {filme['ano_lancamento']}")
 
     print('')
-    input('Enter para voltar para Menu')
+    input('Pressione Enter para voltar ao menu.')
 
 def atualizar_filme():
     print('Atualizar Informações')
-    titulo = input('Digite o título do filme que deseja atualizar: ')
+    titulo = input('Digite o título do filme que deseja atualizar: ').strip()
     for filme in filmes:
         if filme['titulo'].lower() == titulo.lower():
             print(f'Informações atuais: {filme}')
 
-        novo_diretor = input('Digite o novo diretor (ou pressione Enter para manter o atual): ')
+        novo_diretor = input('Digite o novo diretor (ou pressione Enter para manter o atual): ').strip()
         if novo_diretor:
             filme['diretor'] = novo_diretor
 
-        novo_ano = int(input('Digite o novo ano de lançamento (ou pressione Enter para manter o atual): '))
-        if novo_ano > 0:
-            filme['ano_lancamento'] = novo_ano
+        novo_ano = input('Digite o novo ano de lançamento (ou pressione Enter para manter o atual): ')	  .strip()
+        if novo_ano.isdigit():
+            filme['ano_lancamento'] = int(novo_ano)
 
-        print(f"\n✅ As informações do livro '{filme['titulo']}' foram atualizadas com sucesso!")
+        print(f"\n✅ As informações do filme '{filme['titulo']}' foram atualizadas com sucesso!")
+        input('Pressione Enter para voltar ao menu.')
         return
 
-    print(f"❌ Livro '{titulo}' não encontrado.")
-
-    print('')
-    input('Enter para voltar para Menu')
+    print(f"❌ Filme '{titulo}' não encontrado.")
+    input('Pressione Enter para voltar ao menu.')
 
 def excluir_filme():
     if not filmes:
-        print("❌ Nenhum titulo cadastrado ainda.")
-        print('')
-        input('Enter para voltar para Menu')
+        print("❌ Nenhum título cadastrado ainda.")
+        input('Pressione Enter para voltar ao menu.')
         return
 
 
 
-    titulo = print(input('Digite o título do filme que deseja excluir: '))
+    titulo = input('Digite o título do filme que deseja excluir: ').strip()
     for i, filme in enumerate(filmes):
-        filmes.pop(i)
-        print(f"\n✅ O filme '{filme['titulo']} foi excluído com sucesso!")
-        return
+        if filme['titulo'].lower() == titulo.lower():
+            filmes.pop(i)
+            print(f"\n✅ O filme '{filme['titulo']}' foi excluído com sucesso!")
+            input('Pressione Enter para voltar ao menu.')
+            return
+
+    print(f"❌ Filme '{titulo}' não encontrado.")
+    input('Pressione Enter para voltar ao menu.')
 
 
 
@@ -137,16 +127,15 @@ def main():
             elif opcao == 4:
                 excluir_filme()
             elif opcao == 5:
+                print("\n👋 Obrigado por usar o Gerenciamento de Filmes! Até a próxima!")
                 break
             else:
                 print('❌ Opção inválida. Escolha entre 1 e 5.')
-                print('')
-                input('Enter para voltar para Menu')
+
+                input('Pressione Enter para voltar ao menu.')
         except ValueError:
             print('❌ Insira um número válido.')
-            print('')
-            input('Enter para voltar para Menu')
-
+            input('Pressione Enter para voltar ao menu.')
 
 
 
