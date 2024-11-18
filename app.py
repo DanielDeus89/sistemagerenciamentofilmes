@@ -62,6 +62,8 @@ def cadastrar_filme():
 def listar_filmes():
     if not filmes:
         print("❌ Nenhum titulo cadastrado ainda.")
+        print('')
+        input('Enter para voltar para Menu')
         return
 
 
@@ -80,7 +82,7 @@ def listar_filmes():
     print('')
     input('Enter para voltar para Menu')
 
-def atualziar_info():
+def atualizar_filme():
     print('Atualizar Informações')
     titulo = input('Digite o título do filme que deseja atualizar: ')
     for filme in filmes:
@@ -103,27 +105,47 @@ def atualziar_info():
     print('')
     input('Enter para voltar para Menu')
 
-def excluir_um_filme():
+def excluir_filme():
+    if not filmes:
+        print("❌ Nenhum titulo cadastrado ainda.")
+        print('')
+        input('Enter para voltar para Menu')
+        return
+
+
+
     titulo = print(input('Digite o título do filme que deseja excluir: '))
     for i, filme in enumerate(filmes):
         filmes.pop(i)
-        print(f"\n✅ O filme '{Matrix}' foi excluído com sucesso!")
-    return
+        print(f"\n✅ O filme '{filme['titulo']} foi excluído com sucesso!")
+        return
+
 
 
 def main():
     while True:
         exibir_opcoes()
-        opcao = int(input('Escolha uma opção: _'))
+        try:
+            opcao = int(input('Escolha uma opção: _'))
 
-        if opcao == 1:
-            cadastrar_filme()
-        elif opcao == 2:
-            listar_filmes()
-        elif opcao == 3:
-            atualziar_info()
-        elif opcao == 5:
-            break
+            if opcao == 1:
+                cadastrar_filme()
+            elif opcao == 2:
+                listar_filmes()
+            elif opcao == 3:
+                atualizar_filme()
+            elif opcao == 4:
+                excluir_filme()
+            elif opcao == 5:
+                break
+            else:
+                print('❌ Opção inválida. Escolha entre 1 e 5.')
+                print('')
+                input('Enter para voltar para Menu')
+        except ValueError:
+            print('❌ Insira um número válido.')
+            print('')
+            input('Enter para voltar para Menu')
 
 
 
