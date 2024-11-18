@@ -1,8 +1,8 @@
-﻿# sistemagerenciamentofilmes
+﻿# Sistema Gerenciamento Filmes
  
 ---
 
- Atividade: Sistema de Gerenciamento de Filmes
+Atividade: Sistema de Gerenciamento de Filmes
 
 Crie um programa que gerencie uma lista de filmes. O programa deve oferecer as seguintes opções no menu:
 
