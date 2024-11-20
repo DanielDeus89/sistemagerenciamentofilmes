@@ -1,4 +1,4 @@
-﻿# Sistema Gerenciamento Filmes
+﻿# Sistema de Gerenciamento de Filmes
  
 ---
 
